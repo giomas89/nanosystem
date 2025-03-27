@@ -1,0 +1,15 @@
+.card-carrello{
+  height: calc(20vh - 32px);
+  padding: 25px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+
+  padding:16px;
+  box-shadow: none;
+  background-color: #eee;
+  border:1px solid #ccc;
+  border-radius:7px;
+  margin-bottom:10px;
+}

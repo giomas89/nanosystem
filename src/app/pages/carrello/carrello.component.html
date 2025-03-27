@@ -1,0 +1,65 @@
+<div class="card-carrello">
+
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <div>
+      @if(carrelloService.carrello().cliente){
+        <strong style="font-size: 18px; color: #555;">Cliente:</strong>
+        <p style="font-size: 18px; color: #333; margin: 5px 0;">
+          {{ carrelloService.carrello().cliente.cognome }} {{ carrelloService.carrello().cliente.nome }}
+        </p>
+      }
+      </div>
+
+    <div>
+      @if(carrelloService.carrello().pizza){
+        <strong style="font-size: 18px; color: #555;">Pizza:</strong>
+        <p style="font-size: 18px; color: #333; margin: 5px 0;">
+          {{ carrelloService.carrello().pizza.nome }} {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }}
+        </p>
+      }
+    </div>
+
+    @if(carrelloService.carrello().totale){
+      <button style="margin-top: 10px; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
+      (click)="carrelloService.svuotaCarrello()">
+        Pulisci Carrello
+      </button>
+    }
+  </div>
+
+  @if(carrelloService.carrello().motivazioneSconto){
+    <div [innerHTML]="carrelloService.carrello().motivazioneSconto"></div>
+  }
+
+  @if(carrelloService.carrello().totale){
+
+    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+      <div style="text-align: right;">
+        <strong style="font-size: 18px; color: #555;">Importo pizza:</strong>
+        <p style="font-size: 18px; color: #333; margin: 5px 0;">
+          {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }}
+        </p>
+      </div>
+
+      <div style="display:flex; gap:32px">
+        <div style="text-align: right;">
+          <strong style="font-size: 18px; color: #555;">Sconto:</strong>
+          <p style="font-size: 18px; color: #333; margin: 5px 0;">
+            {{ carrelloService.carrello().sconto }} %
+          </p>
+        </div>
+
+        <div style="text-align: right;">
+          <strong style="font-size: 18px; color: #555;">Importo sconto:</strong>
+          <p style="font-size: 18px; color: red; font-weight: bold; margin: 5px 0;">
+            - {{ carrelloService.carrello().importoSconto | currency: 'EUR' }}
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: right; font-size: 20px; font-weight: bold; color: #333;">
+        <h2 style="margin:8px 0 0 0">Totale: {{ carrelloService.carrello().totale | currency: 'EUR' }}</h2>
+      </div>
+    </div>
+  }
+</div>

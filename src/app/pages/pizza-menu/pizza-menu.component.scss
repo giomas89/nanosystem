@@ -1,0 +1,15 @@
+.pizza-card{
+  padding:16px;
+  box-shadow: none;
+  background-color: #eee;
+  border:1px solid #ccc;
+  border-radius:7px;
+  margin-bottom:10px;
+
+  cursor:pointer;
+
+  &:hover{
+    background-color:#ddd;
+    border:1px solid #aaa;
+  }
+}
