@@ -1,14 +1,20 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { ICarrello } from '../models/ICarrello';
 import { IPizza } from '../models/IPizza';
 import { ICliente } from '../models/ICliente';
-
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { GruppoService } from './gruppo.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrelloService {
   carrello = signal<ICarrello>({} as ICarrello);
+  gruppoService = inject(GruppoService);
+  private httpClient = inject(HttpClient);
+
+  constructor() { }
 
   selezionaCliente(cliente:ICliente){
     // this.carrello().idCliente = cliente.codice;
@@ -26,6 +32,11 @@ export class CarrelloService {
 
   svuotaCarrello(){
     this.carrello.set({} as ICarrello);
+  }
+
+
+  aggiornaDataOraOrdine() {
+    this.calcoloSconto(); // Ricalcola gli sconti
   }
 
   calcoloSconto(){
@@ -46,35 +57,46 @@ export class CarrelloService {
       motivazioneSconto = 'Il cliente è una persona diversamente abile = sconto del 90%';
     }
 
-    // Se fa parte di un gruppo da 15 a 20 persone scontare del 20%
-    // if(this.carrello().cliente.numeroPersoneGruppo >= 15
-    //     && this.carrello().cliente.numeroPersoneGruppo <= 20){
-    //   this.carrello().sconto = this.carrello().pizza.prezzo * 0.20;
-    // }
+    // Sconti di gruppo
+  if (this.carrello().cliente.idGruppo) {
+    let objGruppo = this.gruppoService.getGruppo(this.carrello().cliente.idGruppo);
+    if(objGruppo){
+      const numeroPersoneGruppo = objGruppo.arClienti.length;
 
-    // Se fa parte di un gruppo da 21 a 25 persone scontare del 30%
-    // if(this.carrello().cliente.numeroPersoneGruppo >= 21
-    //     && this.carrello().cliente.numeroPersoneGruppo <= 25){
-    //   sconto = 30:
-    // }
+      // Se fa parte di un gruppo da 15 a 20 persone scontare del 20%
+      if (numeroPersoneGruppo >= 15 && numeroPersoneGruppo <= 20) {
+        sconto = 20;
+        motivazioneSconto = 'Gruppo da 15 a 20 persone = sconto del 20%';
+      }
 
-    // Se fa parte di un gruppo con più di 25 persone scontare del 50%
-    // if(this.carrello().cliente.numeroPersoneGruppo > 25){
-    //   sconto = 50;
-    // }
+      // Se fa parte di un gruppo da 21 a 25 persone scontare del 30%
+      if (numeroPersoneGruppo >= 21 && numeroPersoneGruppo <= 25) {
+        sconto = 30;
+        motivazioneSconto = 'Gruppo da 21 a 25 persone = sconto del 30%';
+      }
+
+      // Se fa parte di un gruppo con più di 25 persone scontare del 50%
+      if (numeroPersoneGruppo > 25) {
+        sconto = 50;
+        motivazioneSconto = 'Gruppo con più di 25 persone = sconto del 50%';
+      }
+    }
+  }
 
     // Se non sono stati applicati altri sconti, e l'ordine arriva entro le 20:00, scontare del 10%.
     // Lo stesso sconto si applica per il weekend indipendentemente dall'ora
     if (sconto === 0) {
-      const oggi = new Date();
-      const ora = oggi.getHours();
-      const giornoSettimana = oggi.getDay();
+      const dataOrdine = this.carrello().dataOra;
+      if (dataOrdine) {
+        const ora = dataOrdine.getHours();
+        const giornoSettimana = dataOrdine.getDay();
 
-      const isWeekend = giornoSettimana === 0 || giornoSettimana === 6;
+        const isWeekend = giornoSettimana === 0 || giornoSettimana === 6;
 
-      if (ora < 20 || isWeekend) {
-        sconto = 10; // Applica uno sconto del 10%
-        motivazioneSconto = 'Ordine entro le 20:00 o nel weekend = sconto del 10%';
+        if (ora < 20 || isWeekend) {
+          sconto = 10;
+          motivazioneSconto = 'Ordine entro le 20:00 o nel weekend = sconto del 10%';
+        }
       }
     }
 
@@ -121,5 +143,13 @@ export class CarrelloService {
     this.carrello().totale = totale;
   }
 
-  constructor() { }
+
+  getSconti(): Observable<string> {
+    return this.httpClient.get('assets/scontistica.txt', { responseType: 'text' });
+  }
+      // this.httpClient.get('assets/changelog.txt', {responseType: 'text'}).subscribe(data => {
+    //   var md = marked.setOptions({mangle:false,headerIds:false});
+    //   this.content = md.parse(data);
+    // });
+
 }

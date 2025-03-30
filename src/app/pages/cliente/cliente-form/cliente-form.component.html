@@ -1,66 +1,48 @@
+<h3>Aggiungi un nuovo cliente</h3>
+<form [formGroup]="clienteForm" (ngSubmit)="aggiungiCliente()" class="customer-form">
+  <mat-form-field>
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Cognome</mat-label>
+    <input matInput formControlName="cognome" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Data di Nascita</mat-label>
+    <input matInput [matDatepicker]="selettoreDataNascita" formControlName="dataNascita" required>
+    <mat-datepicker-toggle matSuffix [for]="selettoreDataNascita"></mat-datepicker-toggle>
+    <mat-datepicker #selettoreDataNascita></mat-datepicker>
+  </mat-form-field>
+
+  <section>
+    <mat-slide-toggle style="margin:6px 0" formControlName="hasFidelityCard">
+      Carta Fedeltà
+    </mat-slide-toggle>
+  </section>
+
+  <section>
+    <mat-slide-toggle style="margin:6px 0" formControlName="hasDisabilita">
+      Disabile
+    </mat-slide-toggle>
+  </section>
+
+  <!-- <mat-form-field>
+    <mat-label>Gruppo</mat-label>
+    <mat-select formControlName="idGruppo">
+      <mat-option *ngFor="let gruppo of gruppoService.listaGruppi()" [value]="gruppo.codice">
+        {{ gruppo.nome }} ({{ gruppo.arClienti.length }} persone)
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="clienteForm.invalid">
+    Aggiungi Cliente
+  </button>
+</form>
+
 <div>
-  <h3>Inserisci un nuovo cliente</h3>
-  <form #clienteForm="ngForm" (ngSubmit)="aggiungiCliente()" class="customer-form">
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-      <input matInput
-             [(ngModel)]="nuovoCliente.nome"
-             name="nome"
-             required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Cognome</mat-label>
-      <input matInput
-             [(ngModel)]="nuovoCliente.cognome"
-             name="cognome"
-             required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Data di Nascita</mat-label>
-      <input matInput
-             [matDatepicker]="selettoreDataNascita"
-             [(ngModel)]="nuovoCliente.dataNascita"
-             name="dataNascita"
-             required>
-      <mat-datepicker-toggle matSuffix [for]="selettoreDataNascita"></mat-datepicker-toggle>
-      <mat-datepicker #selettoreDataNascita></mat-datepicker>
-    </mat-form-field>
-
-    <section>
-      <mat-slide-toggle
-      style="margin:6px 0"
-        [(ngModel)]="nuovoCliente.hasFidelityCard"
-        name="hasFidelityCard">
-        Carta Fedeltà
-      </mat-slide-toggle>
-    </section>
-
-    <section>
-      <mat-slide-toggle
-      style="margin:6px 0"
-        [(ngModel)]="nuovoCliente.hasDisabilita"
-        name="hasDisabilita">
-        Disabile
-      </mat-slide-toggle>
-    </section>
-
-    <mat-form-field>
-      <mat-label>Gruppo</mat-label>
-      <mat-select formControlName="idGruppo" required>
-        <mat-option *ngFor="let gruppo of gruppoService.listaGruppi()" [value]="gruppo.codice">
-          {{ gruppo.nome }} ({{ gruppo.numeroPersone }} persone)
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-
-    <button mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="!clienteForm.form.valid">
-      Aggiungi Cliente
-    </button>
-  </form>
+  {{this.scontiText}}
 </div>

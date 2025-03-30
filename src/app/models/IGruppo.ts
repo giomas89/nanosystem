@@ -4,5 +4,5 @@ export interface IGruppo {
   codice: number;
   nome: string;
   arClienti: ICliente[];
-  numeroPersone: number;
+  numeroPersone?: number;
 }

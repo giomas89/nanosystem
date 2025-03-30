@@ -7,4 +7,5 @@ export interface IOrdine {
   prezzo: number;
   sconto: number;
   prezzoFinale: number;
+  dataOra : Date;
 }

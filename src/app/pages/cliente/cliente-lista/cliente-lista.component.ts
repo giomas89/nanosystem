@@ -10,6 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ClienteService } from '../../../services/cliente.service';
 import { CarrelloService } from '../../../services/carrello.service';
+import { GruppoService } from '../../../services/gruppo.service';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -29,6 +30,7 @@ import { CarrelloService } from '../../../services/carrello.service';
 export class ClienteListaComponent {
   clienteService = inject(ClienteService);
   carrelloService = inject(CarrelloService);
+  gruppoService = inject(GruppoService);
 
   ngOnInit(){
     this.clienteService.inizializzaListaClienti();

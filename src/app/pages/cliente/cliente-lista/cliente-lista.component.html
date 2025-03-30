@@ -19,9 +19,13 @@
             </div>
           </div>
         </div>
-        <div>
-          {{cliente.idGruppo ? 'Gruppo:' + cliente.nomeGruppo + '('+cliente.numeroPersoneGruppo+')': ''}}
-        </div>
+        @if (cliente.idGruppo) {
+          <div>
+            @if (this.gruppoService.getGruppo(cliente.idGruppo)) {
+              {{ 'Gruppo: ' + this.gruppoService.getGruppo(cliente.idGruppo)!.nome + ' (' + this.gruppoService.getGruppo(cliente.idGruppo)!.arClienti.length + ' persone)' }}
+            }
+          </div>
+        }
       </div>
     }
     @empty {

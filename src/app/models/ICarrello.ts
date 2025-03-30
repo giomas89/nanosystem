@@ -10,4 +10,5 @@ export interface ICarrello {
     importoSconto:number,
     totale:number
     motivazioneSconto:string
+    dataOra : Date;
   }

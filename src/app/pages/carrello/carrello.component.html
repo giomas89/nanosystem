@@ -1,17 +1,16 @@
 <div class="card-carrello">
-
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     <div>
-      @if(carrelloService.carrello().cliente){
+      @if (carrelloService.carrello().cliente) {
         <strong style="font-size: 18px; color: #555;">Cliente:</strong>
         <p style="font-size: 18px; color: #333; margin: 5px 0;">
           {{ carrelloService.carrello().cliente.cognome }} {{ carrelloService.carrello().cliente.nome }}
         </p>
       }
-      </div>
+    </div>
 
     <div>
-      @if(carrelloService.carrello().pizza){
+      @if (carrelloService.carrello().pizza) {
         <strong style="font-size: 18px; color: #555;">Pizza:</strong>
         <p style="font-size: 18px; color: #333; margin: 5px 0;">
           {{ carrelloService.carrello().pizza.nome }} {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }}
@@ -19,29 +18,41 @@
       }
     </div>
 
-    @if(carrelloService.carrello().totale){
-      <button style="margin-top: 10px; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
-      (click)="carrelloService.svuotaCarrello()">
+    @if (carrelloService.carrello().totale) {
+      <button
+        style="margin-top: 10px; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
+        (click)="carrelloService.svuotaCarrello()"
+      >
         Pulisci Carrello
       </button>
     }
   </div>
 
-  @if(carrelloService.carrello().motivazioneSconto){
+  @if (carrelloService.carrello().totale) {
+    <div style="display: flex; justify-content: center; margin-top: 10px;">
+      <mat-form-field>
+        <mat-label>Data e Ora Ordine</mat-label>
+        <input matInput [matDatetimepicker]="selettoreDataOra" [(ngModel)]="carrelloService.carrello().dataOra">
+        <mat-datetimepicker-toggle matSuffix [for]="selettoreDataOra"></mat-datetimepicker-toggle>
+        <mat-datetimepicker #selettoreDataOra></mat-datetimepicker>
+      </mat-form-field>
+    </div>
+  }
+
+  @if (carrelloService.carrello().motivazioneSconto) {
     <div [innerHTML]="carrelloService.carrello().motivazioneSconto"></div>
   }
 
-  @if(carrelloService.carrello().totale){
-
+  @if (carrelloService.carrello().totale) {
     <div style="display: flex; flex-direction: column; align-items: flex-end;">
       <div style="text-align: right;">
         <strong style="font-size: 18px; color: #555;">Importo pizza:</strong>
         <p style="font-size: 18px; color: #333; margin: 5px 0;">
-          {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }}
+          {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }} //TODO: appena selezionata la pizza non si valorizza, devo riselezionarla
         </p>
       </div>
 
-      <div style="display:flex; gap:32px">
+      <div style="display: flex; gap: 32px;">
         <div style="text-align: right;">
           <strong style="font-size: 18px; color: #555;">Sconto:</strong>
           <p style="font-size: 18px; color: #333; margin: 5px 0;">
@@ -58,7 +69,7 @@
       </div>
 
       <div style="text-align: right; font-size: 20px; font-weight: bold; color: #333;">
-        <h2 style="margin:8px 0 0 0">Totale: {{ carrelloService.carrello().totale | currency: 'EUR' }}</h2>
+        <h2 style="margin: 8px 0 0 0;">Totale: {{ carrelloService.carrello().totale | currency: 'EUR' }}</h2>
       </div>
     </div>
   }

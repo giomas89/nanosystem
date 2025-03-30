@@ -1,12 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { IGruppo } from '../models/IGruppo';
 import { ICliente } from '../models/ICliente';
+import { ClienteService } from './cliente.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GruppoService {
   listaGruppi = signal<IGruppo[]>([]);
+  clienteService = inject(ClienteService);
 
   constructor() {
       let arGruppi: IGruppo[] = [
@@ -14,25 +16,21 @@ export class GruppoService {
           codice: 1,
           nome: 'Calcetto',
           arClienti: this.generaClienti(1, 'Calcetto', 10),
-          numeroPersone: 10,
         },
         {
           codice: 2,
           nome: 'Orchestra',
           arClienti: this.generaClienti(2, 'Orchestra', 60),
-          numeroPersone: 60,
         },
         {
           codice: 3,
           nome: 'Consiglio Amministrazione',
           arClienti: this.generaClienti(3, 'Amministrazione', 23),
-          numeroPersone: 23,
         },
         {
           codice: 4,
           nome: 'Rimpatriata di Classe',
           arClienti: this.generaClienti(4, 'Classe', 18),
-          numeroPersone: 18,
         },
       ];
       this.listaGruppi.set(arGruppi);
@@ -65,4 +63,17 @@ export class GruppoService {
         };
       });
     }
-}
+
+    getGruppo(idGruppo?: number): IGruppo | undefined {
+      let objGruppo;
+      if(idGruppo){
+        objGruppo = this.listaGruppi().find(gruppo => gruppo.codice === idGruppo);
+      }
+      return objGruppo;
+    }
+
+    addUserToGroup(){
+      let gruppo = this.getGruppo(this.clienteService.clienteAggiunto().idGruppo);
+      gruppo?.arClienti.push(this.clienteService.clienteAggiunto());
+    }
+  }
