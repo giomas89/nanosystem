@@ -15,7 +15,7 @@ export class GruppoService {
         {
           codice: 1,
           nome: 'Calcetto',
-          arClienti: this.generaClienti(1, 'Calcetto', 10),
+          arClienti: this.generaClienti(1, 'Calcetto', 13),
         },
         {
           codice: 2,
@@ -31,6 +31,11 @@ export class GruppoService {
           codice: 4,
           nome: 'Rimpatriata di Classe',
           arClienti: this.generaClienti(4, 'Classe', 18),
+        },
+        {
+          codice: 5,
+          nome: 'Condomino',
+          arClienti: this.generaClienti(5, 'Condomino', 16),
         },
       ];
       this.listaGruppi.set(arGruppi);

@@ -1,11 +1,15 @@
-<div style="height: 100vh; display: flex;">
-  <div style="width:70%; padding: 32px; display: flex; justify-content: space-between;">
-    <app-cliente-form style="flex: 0 0 calc(30% - 16px);background-color:#fffaf5"></app-cliente-form>
-    <app-cliente-lista style="flex: 0 0 30%; overflow-y: auto;background-color:#fff5e6"></app-cliente-lista>
-    <app-pizza-menu style="flex: 0 0 calc(40% - 16px); overflow-y: auto;background-color:#fef9f2"></app-pizza-menu>
+<div style="display: flex; flex-direction: column; height: 100vh;">
+  <div style="padding: 8px; background-color: var(--primary-color);">
+    <h2 style="margin: 0; color: white;">Pizza Order</h2>
   </div>
-  <div style="width: 25%; background-color: #fff8f0; padding: 16px;
-    overflow-y: auto; border-left:1px solid #c0c0c0;">
-    <app-carrello></app-carrello>
+  <div style="flex-grow: 1; display: flex;justify-content:space-between; overflow-y: hidden;">
+    <div style="padding: 8px; display: flex; flex:1; justify-content: space-between;">
+      <app-cliente-form style="flex: 0 0 calc(30% - 8px); padding: 8px; box-sizing: border-box; border: 1px dotted var(--primary-color); border-radius: 7px;"></app-cliente-form>
+      <app-cliente-lista style="flex: 0 0 35%; padding: 8px; box-sizing: border-box; border: 1px dotted var(--primary-color); border-radius: 7px; overflow-y: auto;"></app-cliente-lista>
+      <app-pizza-menu style="flex: 0 0 calc(35% - 8px); padding: 8px; box-sizing: border-box; border: 1px dotted var(--primary-color); border-radius: 7px; overflow-y: auto;"></app-pizza-menu>
+    </div>
+    <div style="width: 25%; background-color: #fff8f0; border-left: 1px solid #c0c0c0; padding: 8px; overflow-y: auto;">
+      <app-carrello></app-carrello>
+    </div>
   </div>
 </div>

@@ -76,3 +76,8 @@
     background-color: #a00;
   }
 }
+
+// FIX d'urgenza
+.mat-mdc-button:not(:disabled){
+  color:white!important;
+}

@@ -24,7 +24,7 @@ export class ClienteService {
         dataNascita: new Date(1985, 5, 15),
         hasFidelityCard: false,
         hasDisabilita: false,
-        idGruppo: 1,
+        idGruppo: 5,
       },
       {
         codice: 2,
@@ -32,8 +32,8 @@ export class ClienteService {
         cognome: "Bianchi",
         dataNascita: new Date(1992, 8, 22),
         hasFidelityCard: false,
-        hasDisabilita: true,
-        idGruppo: 2,
+        hasDisabilita: false,
+        idGruppo: 0,
       },
       {
         codice: 3,
@@ -49,8 +49,8 @@ export class ClienteService {
         nome: "Sofia",
         cognome: "Ferrari",
         dataNascita: new Date(1990, 11, 30),
-        hasFidelityCard: true,
-        hasDisabilita: false,
+        hasFidelityCard: false,
+        hasDisabilita: true,
         idGruppo: 1,
       },
       {

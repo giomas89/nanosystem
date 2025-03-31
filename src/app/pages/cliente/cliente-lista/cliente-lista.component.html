@@ -20,13 +20,19 @@
               <span style="font-size:32px">♿</span> }
           </div>
         </div>
-        @if (cliente.idGruppo) {
-          <div class="customer-group">
+
+        <div class="customer-group">
+          @if (cliente.idGruppo) {
             @if (this.gruppoService.getGruppo(cliente.idGruppo)) {
               {{ 'Gruppo: ' + this.gruppoService.getGruppo(cliente.idGruppo)!.nome + ' (' + this.gruppoService.getGruppo(cliente.idGruppo)!.arClienti.length + ' persone)' }}
+            } @else {
+              Nessun gruppo trovato
             }
-          </div>
-        }
+          } @else {
+              Nessun gruppo associato
+          }
+        </div>
+        
         <button mat-button class="select-button" (click)="this.carrelloService.selezionaCliente(cliente)">
           Seleziona
         </button>
