@@ -1,35 +1,37 @@
+<div class="header-component">
+  <h2 style="margin:0">Lista Clienti</h2>
+  <span style="color:#999">Seleziona un cliente per aggiungerlo al carrello</span>
+</div>
+
 <div class="customers-list">
-  <h3>Lista Clienti</h3>
+
   <div class="customers-grid">
-    @for (cliente of this.clienteService.listaClienti(); track cliente.codice) {
-      <div class="customer-card" (click)="this.carrelloService.selezionaCliente(cliente)">
-        <div style="display:flex;">
-          <div style="display:flex; align-items:center; flex:0 0 85%; gap:6px;">
-            <span style="font-size:20px; font-weight:500;">{{ cliente.nome }} {{ cliente.cognome }}</span>
-            <span style="font-size:16px">[{{ cliente.dataNascita ? calcolaEta(cliente.dataNascita) : 'N/A' }} anni]</span>
+    @for (cliente of clienteService.listaClienti(); track cliente.codice) {
+      <div class="customer-card">
+        <div class="customer-details">
+          <div class="customer-text">
+            <span class="customer-name">{{ cliente.nome }} {{ cliente.cognome }}</span>
+            <span class="customer-info">[{{ cliente.dataNascita ? clienteService.calcolaEta(cliente.dataNascita) : 'N/A' }} anni]</span>
           </div>
-          <div style="flex:0 0 15%">
-            <div class="icons">
-              @if (cliente.hasFidelityCard) {
-                <mat-icon class="icon">card_membership</mat-icon>
-              }
-              @if (cliente.hasDisabilita) {
-                <mat-icon class="icon">accessible</mat-icon>
-              }
-            </div>
+          <div class="customer-icons">
+            @if (cliente.hasFidelityCard) {
+              <span style="font-size:32px">💳</span> }
+            @if (cliente.hasDisabilita) {
+              <span style="font-size:32px">♿</span> }
           </div>
         </div>
         @if (cliente.idGruppo) {
-          <div>
+          <div class="customer-group">
             @if (this.gruppoService.getGruppo(cliente.idGruppo)) {
               {{ 'Gruppo: ' + this.gruppoService.getGruppo(cliente.idGruppo)!.nome + ' (' + this.gruppoService.getGruppo(cliente.idGruppo)!.arClienti.length + ' persone)' }}
             }
           </div>
         }
+        <button mat-button class="select-button" (click)="this.carrelloService.selezionaCliente(cliente)">
+          Seleziona
+        </button>
       </div>
-    }
-    @empty {
-      <p>Nessun cliente trovato</p>
     }
   </div>
 </div>
+

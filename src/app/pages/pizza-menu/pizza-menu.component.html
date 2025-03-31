@@ -1,15 +1,29 @@
+<div class="header-component">
+  <h2 style="margin:0">Lista Pizze</h2>
+  <span style="color:#999">Seleziona una pizza per aggiungerla al carrello</span>
+</div>
+
 <div class="pizza-list">
-  <h3>Lista Pizze</h3>
+
   <div class="pizza-grid">
     @for (pizza of pizzaService.listaPizze(); track pizza.codice) {
-      <div class="pizza-card" (click)="this.carrelloService.selezionaPizza(pizza)">
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-          <span style="font-size: 20px; font-weight: 500;">{{ pizza.nome }}</span>
-          <span style="font-size: 16px;">{{ pizza.prezzo | currency: 'EUR' }}</span>
+      <div class="pizza-card">
+        <img [src]="'https://foodish-api.com/images/pizza/pizza' + pizza.codice + '.jpg'" alt="{{ pizza.nome }}"
+          class="pizza-image">
+        <div class="pizza-details">
+          <div class="pizza-text">
+            <span class="pizza-name">{{ pizza.nome }}</span>
+            <span class="pizza-description">{{ pizza.descrizione }}</span>
+          </div>
+          <div class="pizza-actions">
+            <span class="pizza-price">{{ pizza.prezzo | currency: 'EUR' }}</span>
+          </div>
+          <button mat-button class="select-button" (click)="this.carrelloService.selezionaPizza(pizza)">
+            Seleziona
+          </button>
         </div>
       </div>
-    }
-    @empty {
+    } @empty {
       <p>Nessuna pizza trovata</p>
     }
   </div>

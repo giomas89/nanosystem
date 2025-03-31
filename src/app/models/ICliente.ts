@@ -10,6 +10,5 @@ export interface ICliente {
   nomeGruppo?:string;
   numeroPersoneGruppo?:number;
 
-  dataOraOrdine?: Date;
   selezionato?:boolean;
 }

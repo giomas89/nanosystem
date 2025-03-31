@@ -4,8 +4,8 @@ import { IPizza } from "./IPizza"
 export interface ICarrello {
     // idCliente : number,
     // idPizza : number,
-    pizza:IPizza,
-    cliente:ICliente,
+    cliente: ICliente;
+    pizza: IPizza;
     sconto:number,
     importoSconto:number,
     totale:number

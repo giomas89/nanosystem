@@ -1,76 +1,111 @@
-<div class="card-carrello">
-  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-    <div>
-      @if (carrelloService.carrello().cliente) {
-        <strong style="font-size: 18px; color: #555;">Cliente:</strong>
-        <p style="font-size: 18px; color: #333; margin: 5px 0;">
-          {{ carrelloService.carrello().cliente.cognome }} {{ carrelloService.carrello().cliente.nome }}
-        </p>
-      }
-    </div>
-
-    <div>
-      @if (carrelloService.carrello().pizza) {
-        <strong style="font-size: 18px; color: #555;">Pizza:</strong>
-        <p style="font-size: 18px; color: #333; margin: 5px 0;">
-          {{ carrelloService.carrello().pizza.nome }} {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }}
-        </p>
-      }
-    </div>
-
-    @if (carrelloService.carrello().totale) {
-      <button
-        style="margin-top: 10px; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
-        (click)="carrelloService.svuotaCarrello()"
-      >
-        Pulisci Carrello
-      </button>
-    }
+<div style="display: flex; flex-direction: column; min-height: 100%">
+  <div class="header-component">
+    <h2 style="margin:0">Carrello</h2>
+    <span style="color:#999">Seleziona una pizza ed un cliente per poter calcolare i costi ed eventuali sconti.</span>
   </div>
 
-  @if (carrelloService.carrello().totale) {
-    <div style="display: flex; justify-content: center; margin-top: 10px;">
-      <mat-form-field>
-        <mat-label>Data e Ora Ordine</mat-label>
-        <input matInput [matDatetimepicker]="selettoreDataOra" [(ngModel)]="carrelloService.carrello().dataOra">
-        <mat-datetimepicker-toggle matSuffix [for]="selettoreDataOra"></mat-datetimepicker-toggle>
-        <mat-datetimepicker #selettoreDataOra></mat-datetimepicker>
-      </mat-form-field>
+  <div class="content" style="flex: 1;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+
+      <div class="cliente">
+        <h3 style="margin:0 0 4px 0">Cliente</h3>
+        @if (!!carrelloService.carrello().cliente) {
+          <div class="customer-card">
+            <div class="customer-details">
+              <div class="customer-text">
+                <span class="customer-name">{{ carrelloService.carrello().cliente.nome }} {{ carrelloService.carrello().cliente.cognome }}</span>
+                <span class="customer-info">[{{ carrelloService.carrello().cliente.dataNascita ? clienteService.calcolaEta(carrelloService.carrello().cliente.dataNascita) : 'N/A' }} anni]</span>
+              </div>
+              <div class="customer-icons">
+                @if (carrelloService.carrello().cliente.hasFidelityCard) {
+                <span style="font-size:32px"></span>
+                }
+                @if (carrelloService.carrello().cliente.hasDisabilita) {
+                <span style="font-size:32px">♿</span>
+                }
+              </div>
+            </div>
+            @if (carrelloService.carrello().cliente.idGruppo) {
+            <div class="customer-group">
+              {{ 'Gruppo: ' + gruppoService.getGruppo(carrelloService.carrello().cliente.idGruppo)!.nome + ' (' + gruppoService.getGruppo(carrelloService.carrello().cliente.idGruppo)!.arClienti.length + ' persone)' }}
+            </div>
+            }
+          </div>
+        } @else {
+          <span style="color:#999">Nessun cliente selezionato</span>
+        }
+      </div>
+
+      <div class="pizza">
+        <h3 style="margin:0 0 4px 0">Pizza</h3>
+        @if (!!carrelloService.carrello().pizza) {
+          <div class="pizza-card">
+            <img [src]="'https://foodish-api.com/images/pizza/pizza' + carrelloService.carrello().pizza.codice + '.jpg'" alt="{{ carrelloService.carrello().pizza.nome }}" class="pizza-image">
+            <div class="pizza-details">
+              <div class="pizza-text">
+                <span class="pizza-name">{{ carrelloService.carrello().pizza.nome }}</span>
+                <span class="pizza-description">{{ carrelloService.carrello().pizza.descrizione }}</span>
+              </div>
+              <div class="pizza-actions">
+                <span class="pizza-price">{{ carrelloService.carrello().pizza.prezzo || 0 | currency: 'EUR' }}</span>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <span style="color:#999">Nessuna pizza selezionata</span>
+        }
+      </div>
+
+      @if (!!carrelloService.carrello().cliente || !!carrelloService.carrello().pizza) {
+      <button mat-stroked-button color="warn" class="pulisci-carrello-button custom-font" (click)="carrelloService.svuotaCarrello()">
+        Pulisci Carrello
+      </button>
+      }
+
     </div>
-  }
+  </div>
 
-  @if (carrelloService.carrello().motivazioneSconto) {
-    <div [innerHTML]="carrelloService.carrello().motivazioneSconto"></div>
-  }
+  <div class="footer">
+    <div class="data-ora-carrello-section">
+      <h4 style="margin:0">Data e ora dell'ordine</h4>
+      <div class="data-ora-container">
+        <mat-form-field class="custom-font">
+          <input matInput [matDatepicker]="picker" placeholder="Data" [(ngModel)]="selectedDate" (dateChange)="aggiornaDataOra($event)">
+          <mat-datepicker-toggle class="custom-form" matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker class="custom-form" #picker></mat-datepicker>
+        </mat-form-field>
 
-  @if (carrelloService.carrello().totale) {
-    <div style="display: flex; flex-direction: column; align-items: flex-end;">
-      <div style="text-align: right;">
-        <strong style="font-size: 18px; color: #555;">Importo pizza:</strong>
-        <p style="font-size: 18px; color: #333; margin: 5px 0;">
-          {{ carrelloService.carrello().pizza.prezzo | currency: 'EUR' }} //TODO: appena selezionata la pizza non si valorizza, devo riselezionarla
-        </p>
-      </div>
-
-      <div style="display: flex; gap: 32px;">
-        <div style="text-align: right;">
-          <strong style="font-size: 18px; color: #555;">Sconto:</strong>
-          <p style="font-size: 18px; color: #333; margin: 5px 0;">
-            {{ carrelloService.carrello().sconto }} %
-          </p>
-        </div>
-
-        <div style="text-align: right;">
-          <strong style="font-size: 18px; color: #555;">Importo sconto:</strong>
-          <p style="font-size: 18px; color: red; font-weight: bold; margin: 5px 0;">
-            - {{ carrelloService.carrello().importoSconto | currency: 'EUR' }}
-          </p>
-        </div>
-      </div>
-
-      <div style="text-align: right; font-size: 20px; font-weight: bold; color: #333;">
-        <h2 style="margin: 8px 0 0 0;">Totale: {{ carrelloService.carrello().totale | currency: 'EUR' }}</h2>
+        <mat-form-field class="custom-font">
+          <input matInput placeholder="Ora (HH:mm)" [(ngModel)]="selectedTime" (change)="aggiornaOra()">
+        </mat-form-field>
       </div>
     </div>
-  }
+
+    <div class="totale-container">
+      <div class="importo-pizza">
+        <p>IMPORTO PIZZA</p>
+        <p style="text-align: right;">{{ (carrelloService.carrello().pizza && carrelloService.carrello().pizza.prezzo ? carrelloService.carrello().pizza.prezzo : 0) | currency: 'EUR' }}</p>
+      </div>
+
+      <div class="sconto">
+        <p>SCONTO</p>
+        <p style="color:#090; text-align: right;"> {{ carrelloService.carrello().sconto || 0 }}%</p>
+      </div>
+
+      <div class="importo-sconto">
+        <p>IMPORTO SCONTO</p>
+        <p style="color:#090; text-align: right;">- {{ carrelloService.carrello().importoSconto || 0 | currency: 'EUR'}}</p>
+      </div>
+
+      @if (carrelloService.carrello().motivazioneSconto) {
+      <div [innerHTML]="carrelloService.carrello().motivazioneSconto" style="color:#090"></div>
+      }
+
+      <div class="totale">
+        <h2>TOTALE</h2>
+      <h2 style="text-align: right;">{{ (!!carrelloService.carrello().totale ? carrelloService.carrello().totale : 0)  | currency: 'EUR' }}</h2>
+      </div>
+    </div>
+  </div>
+
 </div>

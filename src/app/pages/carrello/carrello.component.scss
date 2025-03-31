@@ -1,15 +1,198 @@
-.card-carrello{
-  height: calc(20vh - 32px);
-  padding: 25px;
+// CSS CARD CLIENTE
+.customer-card {
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff8f0;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #fff5eb;
+  }
+
+  .customer-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .customer-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .customer-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+  }
+
+  .customer-info {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .customer-icons {
+    display: flex;
+    gap: 8px;
+    font-size: 20px; /* Dimensione delle emoji */
+  }
+
+  .customer-group {
+    font-size: 14px;
+    color: #777;
+  }
+
+  .select-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #a00;
+    }
+  }
+}
+
+// CSS CARD PIZZA
+.pizza-card {
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff8f0; /* Sfondo beige chiaro */
+  border-radius: 12px;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizioni fluide */
+
+  &:hover {
+    transform: translateY(-5px); /* Leggero sollevamento al passaggio del mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #fff5eb; /* Sfondo leggermente più scuro al passaggio del mouse */
+  }
+}
+
+.pizza-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leggera ombra sull'immagine */
+}
+
+.pizza-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pizza-name {
+  font-size: 22px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--primary-color); /* Rosso scuro per il nome */
+}
+
+.pizza-description {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.pizza-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pizza-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-color); /* Rosso scuro per il prezzo */
+}
+
+.add-button {
+  background-color: var(--primary-color); /* Rosso scuro per il bottone */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #a00;
+  }
+}
+
+//
+.content {
+  flex: 1;
+}
+
+.footer{
+  max-height:350px;
+}
+
+.pulisci-carrello-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  width:100%;
+  border-radius: 5px;
+  cursor: pointer;
+
+  color:var(--primary-color);
+  border-color:var(--primary-color);
+}
+
+.totale-container {
+  padding: 16px;
+  border: 2px dotted var(--primary-color);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 4px 0;
+  }
+}
+
+.importo-pizza,
+.sconto,
+.importo-sconto,
+.totale {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  margin-bottom: 0;
+}
 
-  padding:16px;
-  box-shadow: none;
-  background-color: #eee;
-  border:1px solid #ccc;
-  border-radius:7px;
-  margin-bottom:10px;
+.totale h2 {
+  margin: 8px 0 0 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.data-ora-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.ora-ordine {
+  margin-top: 10px;
 }

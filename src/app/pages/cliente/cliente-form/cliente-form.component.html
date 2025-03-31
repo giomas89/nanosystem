@@ -1,48 +1,51 @@
-<h3>Aggiungi un nuovo cliente</h3>
+<div class="header-component">
+  <h2 style="margin:0">Nuovo Cliente</h2>
+  <span style="color:#999">Inserisci qui un nuovo cliente per inserirlo nella lista</span>
+</div>
 <form [formGroup]="clienteForm" (ngSubmit)="aggiungiCliente()" class="customer-form">
-  <mat-form-field>
-    <mat-label>Nome</mat-label>
+  <mat-form-field class="custom-font">
+    <mat-label class="custom-font">Nome</mat-label>
     <input matInput formControlName="nome" required>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Cognome</mat-label>
+  <mat-form-field class="custom-font">
+    <mat-label class="custom-font">Cognome</mat-label>
     <input matInput formControlName="cognome" required>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Data di Nascita</mat-label>
+  <mat-form-field class="custom-font">
+    <mat-label class="custom-font">Data di Nascita</mat-label>
     <input matInput [matDatepicker]="selettoreDataNascita" formControlName="dataNascita" required>
-    <mat-datepicker-toggle matSuffix [for]="selettoreDataNascita"></mat-datepicker-toggle>
-    <mat-datepicker #selettoreDataNascita></mat-datepicker>
+    <mat-datepicker-toggle class="custom-form" matSuffix [for]="selettoreDataNascita"></mat-datepicker-toggle>
+    <mat-datepicker class="custom-form" #selettoreDataNascita></mat-datepicker>
   </mat-form-field>
 
-  <section>
+  <section class="custom-font">
     <mat-slide-toggle style="margin:6px 0" formControlName="hasFidelityCard">
-      Carta Fedeltà
+      <span style="margin-left:6px; font-size:18px" class="custom-font">Carta Fedeltà</span>
     </mat-slide-toggle>
   </section>
 
-  <section>
+  <section class="custom-font">
     <mat-slide-toggle style="margin:6px 0" formControlName="hasDisabilita">
-      Disabile
+      <span style="margin-left:6px; font-size:18px" class="custom-font">Disabilità</span>
     </mat-slide-toggle>
   </section>
 
-  <!-- <mat-form-field>
-    <mat-label>Gruppo</mat-label>
+  <mat-form-field class="custom-font" style="margin-top:16px">
+    <mat-label class="custom-font">Gruppo</mat-label>
     <mat-select formControlName="idGruppo">
       <mat-option *ngFor="let gruppo of gruppoService.listaGruppi()" [value]="gruppo.codice">
         {{ gruppo.nome }} ({{ gruppo.arClienti.length }} persone)
       </mat-option>
     </mat-select>
-  </mat-form-field> -->
+  </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="clienteForm.invalid">
+  <button mat-raised-button color="primary" type="submit" class="custom-font" [disabled]="clienteForm.invalid">
     Aggiungi Cliente
   </button>
 </form>
 
-<div>
+<div class="custom-font">
   {{this.scontiText}}
 </div>

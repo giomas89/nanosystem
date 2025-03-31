@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,9 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Importa MatDialog e MatDialogModule
+
+import { FormsModule } from '@angular/forms';
+
 import { ClienteService } from '../../../services/cliente.service';
 import { CarrelloService } from '../../../services/carrello.service';
 import { GruppoService } from '../../../services/gruppo.service';
+import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -23,7 +29,11 @@ import { GruppoService } from '../../../services/gruppo.service';
     MatDividerModule,
     MatSlideToggleModule,
     MatCardModule,
-    MatIconModule,],
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    FormsModule
+  ],
   templateUrl: './cliente-lista.component.html',
   styleUrl: './cliente-lista.component.scss'
 })
@@ -35,15 +45,4 @@ export class ClienteListaComponent {
   ngOnInit(){
     this.clienteService.inizializzaListaClienti();
   }
-
-  calcolaEta(dateOfBirth: Date): number {
-    if (!dateOfBirth) {
-      return 0; // O restituisci un valore predefinito come 0 se la data di nascita non è definita
-    }
-
-    const ageDifMs = Date.now() - new Date(dateOfBirth).getTime();
-    const ageDate = new Date(ageDifMs);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
 }

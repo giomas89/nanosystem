@@ -1,0 +1,58 @@
+:root {
+  --primary-color: #E53935;
+  --secondary-color: #FFC107;
+  --accent-color: #4CAF50;
+  --background-color: #F5F5DC;
+  --rustic-color: #795548;
+  --text-color: #333333; /* Colore del testo principale */
+  --light-text-color: #FFFFFF; /* Colore del testo chiaro su sfondi scuri */
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-color);
+}
+
+.accent-text {
+  color: var(--accent-color);
+}
+
+.rustic-border {
+  border: 2px solid var(--rustic-color);
+  padding: 10px;
+  border-radius: 5px;
+}

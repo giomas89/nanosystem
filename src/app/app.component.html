@@ -1,18 +1,11 @@
-<div style="height: calc(100vh - 72px); padding: 36px; display: flex; gap: 16px;">
-  <div style="width: 30%;">
-    <app-cliente-form></app-cliente-form>
+<div style="height: 100vh; display: flex;">
+  <div style="width:70%; padding: 32px; display: flex; justify-content: space-between;">
+    <app-cliente-form style="flex: 0 0 calc(30% - 16px);background-color:#fffaf5"></app-cliente-form>
+    <app-cliente-lista style="flex: 0 0 30%; overflow-y: auto;background-color:#fff5e6"></app-cliente-lista>
+    <app-pizza-menu style="flex: 0 0 calc(40% - 16px); overflow-y: auto;background-color:#fef9f2"></app-pizza-menu>
   </div>
-  <div style="width: 70%; display: flex; flex-direction: column; gap: 16px; height: 100%;">
-    <div style="display: flex; flex: 1; gap: 16px; max-height: 70%;">
-      <div style="flex: 1; overflow-y: auto;">
-        <app-cliente-lista></app-cliente-lista>
-      </div>
-      <div style="flex: 1; overflow-y: auto;">
-        <app-pizza-menu></app-pizza-menu>
-      </div>
-    </div>
-    <div style="flex: 0 0 30%; overflow-y: auto;" class="card-carrello">
-      <app-carrello></app-carrello>
-    </div>
+  <div style="width: 25%; background-color: #fff8f0; padding: 16px;
+    overflow-y: auto; border-left:1px solid #c0c0c0;">
+    <app-carrello></app-carrello>
   </div>
 </div>

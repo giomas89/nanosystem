@@ -9,6 +9,10 @@ export class ClienteService {
   clienteSelezionato = signal<ICliente>({} as ICliente);
   listaClienti = signal<ICliente[]>([]);
 
+  // listaClientiFiltrati = signal<ICliente[]>([]);
+  searchTerm = signal<string>('');
+
+
   constructor() { }
 
   inizializzaListaClienti(){
@@ -18,10 +22,9 @@ export class ClienteService {
         nome: "Marco",
         cognome: "Rossi",
         dataNascita: new Date(1985, 5, 15),
-        hasFidelityCard: true,
+        hasFidelityCard: false,
         hasDisabilita: false,
         idGruppo: 1,
-        dataOraOrdine: new Date(2024, 2, 20, 14, 30),
       },
       {
         codice: 2,
@@ -31,7 +34,6 @@ export class ClienteService {
         hasFidelityCard: false,
         hasDisabilita: true,
         idGruppo: 2,
-        dataOraOrdine: new Date(2024, 2, 21, 10, 15),
       },
       {
         codice: 3,
@@ -41,7 +43,6 @@ export class ClienteService {
         hasFidelityCard: true,
         hasDisabilita: false,
         idGruppo: 3,
-        dataOraOrdine: new Date(2024, 2, 19, 16, 45),
       },
       {
         codice: 4,
@@ -51,7 +52,6 @@ export class ClienteService {
         hasFidelityCard: true,
         hasDisabilita: false,
         idGruppo: 1,
-        dataOraOrdine: new Date(2024, 2, 22, 13, 0),
       },
       {
         codice: 5,
@@ -61,7 +61,6 @@ export class ClienteService {
         hasFidelityCard: false,
         hasDisabilita: false,
         idGruppo: 2,
-        dataOraOrdine: new Date(2024, 2, 20, 11, 30),
       },
       {
         codice: 6,
@@ -71,7 +70,6 @@ export class ClienteService {
         hasFidelityCard: true,
         hasDisabilita: true,
         idGruppo: 3,
-        dataOraOrdine: new Date(2024, 2, 21, 15, 20),
       },
       {
         codice: 7,
@@ -81,7 +79,6 @@ export class ClienteService {
         hasFidelityCard: false,
         hasDisabilita: false,
         idGruppo: 1,
-        dataOraOrdine: new Date(2024, 2, 19, 17, 10),
       },
       {
         codice: 8,
@@ -91,7 +88,6 @@ export class ClienteService {
         hasFidelityCard: true,
         hasDisabilita: false,
         idGruppo: 2,
-        dataOraOrdine: new Date(2024, 2, 22, 12, 45),
       },
       {
         codice: 9,
@@ -101,7 +97,6 @@ export class ClienteService {
         hasFidelityCard: false,
         hasDisabilita: true,
         idGruppo: 3,
-        dataOraOrdine: new Date(2024, 2, 20, 10, 0),
       },
       {
         codice: 10,
@@ -111,10 +106,35 @@ export class ClienteService {
         hasFidelityCard: true,
         hasDisabilita: false,
         idGruppo: 1,
-        dataOraOrdine: new Date(2024, 2, 21, 16, 30),
       },
     ];
 
     this.listaClienti.set(arClienti);
   }
+
+  calcolaEta(dateOfBirth: Date): number {
+    if (!dateOfBirth) return 0;
+
+    const oggi = new Date();
+    let eta = oggi.getFullYear() - dateOfBirth.getFullYear();
+    const mese = oggi.getMonth() - dateOfBirth.getMonth();
+
+    if (mese < 0 || (mese === 0 && oggi.getDate() < dateOfBirth.getDate())) {
+      eta--;
+    }
+
+    return eta;
+  }
+
+  // filtraClienti() {
+  //   const filteredClients = this.listaClienti();
+  //   if (this.searchTerm){
+  //     this.listaClienti().filter(cliente =>
+  //       cliente.nome.toLowerCase().includes(this.searchTerm().toLowerCase()) ||
+  //       cliente.cognome.toLowerCase().includes(this.searchTerm().toLowerCase())
+  //     );
+  //   }
+  //   this.listaClientiFiltrati.set(filteredClients);
+  // }
+
 }

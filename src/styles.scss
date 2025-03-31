@@ -1,4 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Lexend', sans-serif; }
+
+.header-component{
+  padding:0 0 16px 0;
+}
+
+.header-component span{
+  min-height:20px;
+}
+
+
+.custom-font {
+  font-family: 'Lexend', sans-serif !important;
+}
+.custom-font .mat-datepicker-content .mat-calendar,
+.custom-font .mat-calendar-header,
+.custom-font .mat-calendar-table th,
+.custom-font .mat-calendar-table td {
+  font-family: 'Lexend', sans-serif;
+}
