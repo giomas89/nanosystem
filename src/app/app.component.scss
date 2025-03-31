@@ -118,7 +118,7 @@
   @media (max-width: 768px) {
     width: 100%;
     flex: 1 1 25vh;
-    min-height: 0;
+    min-height: 100%;
     overflow-y: auto;
   }
 }
