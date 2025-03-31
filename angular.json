@@ -43,7 +43,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/pizza-ordine-app",
-            "baseHref": "/nanosystem/src/",
+            "baseHref": "/nanosystem/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
