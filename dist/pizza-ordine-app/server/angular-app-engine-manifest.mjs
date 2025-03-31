@@ -1,6 +1,6 @@
 
 export default {
-  basePath: '/nanosystem',
+  basePath: '/nanosystem/src',
   supportedLocales: {
   "en-US": ""
 },
