@@ -43,6 +43,6 @@ export class ClienteListaComponent {
   gruppoService = inject(GruppoService);
 
   ngOnInit(){
-    this.clienteService.inizializzaListaClienti();
+    this.clienteService.inizializzaListaClienti(); 
   }
 }

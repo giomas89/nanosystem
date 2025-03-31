@@ -10,6 +10,7 @@ export class GruppoService {
   listaGruppi = signal<IGruppo[]>([]);
   clienteService = inject(ClienteService);
 
+  // Generazione tramite supporto di AI di una lista di gruppi
   constructor() {
       let arGruppi: IGruppo[] = [
         {
@@ -41,7 +42,7 @@ export class GruppoService {
       this.listaGruppi.set(arGruppi);
     }
 
-    // Metodo per generare clienti in modo dinamico
+    // Metodo definito da AI per generare clienti in modo dinamico (solo per riempire gli array)
     generaClienti(gruppocodice: number, prefissoGruppo: string, conteggio: number): ICliente[] {
       return Array.from({ length: conteggio }, (_, indice) => {
         const etaMinima = 18;
@@ -69,6 +70,7 @@ export class GruppoService {
       });
     }
 
+    // Funzione che restituisce l'oggetto gruppo per poter mostrare i suoi dati a video
     getGruppo(idGruppo?: number): IGruppo | undefined {
       let objGruppo;
       if(idGruppo){
@@ -77,6 +79,7 @@ export class GruppoService {
       return objGruppo;
     }
 
+    // Funzionalità per aggiungere il nuovo cliente inserito ad un gruppo
     addUserToGroup(){
       let gruppo = this.getGruppo(this.clienteService.clienteAggiunto().idGruppo);
       gruppo?.arClienti.push(this.clienteService.clienteAggiunto());

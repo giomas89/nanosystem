@@ -1,10 +1,9 @@
-// CSS CARD CLIENTE
 .customer-card {
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff8f0;
   border-radius: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -44,7 +43,7 @@
   .customer-icons {
     display: flex;
     gap: 8px;
-    font-size: 20px; /* Dimensione delle emoji */
+    font-size: 20px;
   }
 
   .customer-group {
@@ -58,7 +57,7 @@
     padding: 8px 16px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
-    margin-top: 10px;
+    margin-top: 6px;
 
     &:hover {
       background-color: #a00;
@@ -66,23 +65,22 @@
   }
 }
 
-// CSS CARD PIZZA
 .pizza-card {
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff8f0; /* Sfondo beige chiaro */
+  background-color: #fff8f0;
   border-radius: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   display: flex;
   gap: 16px;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizioni fluide */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px); /* Leggero sollevamento al passaggio del mouse */
+    transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    background-color: #fff5eb; /* Sfondo leggermente più scuro al passaggio del mouse */
+    background-color: #fff5eb;
   }
 }
 
@@ -91,7 +89,7 @@
   width: 120px;
   height: 120px;
   object-fit: cover;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leggera ombra sull'immagine */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pizza-details {
@@ -106,7 +104,7 @@
   font-weight: 600;
   display: block;
   margin-bottom: 6px;
-  color: var(--primary-color); /* Rosso scuro per il nome */
+  color: var(--primary-color);
 }
 
 .pizza-description {
@@ -124,11 +122,11 @@
 .pizza-price {
   font-size: 18px;
   font-weight: 600;
-  color: var(--primary-color); /* Rosso scuro per il prezzo */
+  color: var(--primary-color);
 }
 
 .add-button {
-  background-color: var(--primary-color); /* Rosso scuro per il bottone */
+  background-color: var(--primary-color);
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -139,7 +137,6 @@
   }
 }
 
-//
 .content {
   flex: 1;
 }
@@ -154,7 +151,6 @@
   width:100%;
   border-radius: 5px;
   cursor: pointer;
-
   color:var(--primary-color);
   border-color:var(--primary-color);
 }

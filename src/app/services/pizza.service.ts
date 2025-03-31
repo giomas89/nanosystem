@@ -9,6 +9,7 @@ export class PizzaService {
 
   constructor() { }
 
+  // Generazione tramite supporto di AI di una lista di pizze
   inizializzaListaPizze() {
     const pizze: IPizza[] = [
       {

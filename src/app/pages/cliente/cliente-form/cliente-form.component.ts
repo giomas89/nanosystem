@@ -20,7 +20,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-cliente-form',
- templateUrl: './cliente-form.component.html',
+  templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.scss',
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
@@ -45,6 +45,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class ClienteFormComponent {
   clienteService = inject(ClienteService);
   gruppoService = inject(GruppoService);
+
   fb = inject(FormBuilder);
   clienteForm: FormGroup;
 
@@ -52,6 +53,7 @@ export class ClienteFormComponent {
   carrelloService = inject(CarrelloService);
 
   constructor() {
+    // Inizializzo il form Cliente
     this.clienteForm = this.fb.group({
       nome: ['', Validators.required],
       cognome: ['', Validators.required],
@@ -70,19 +72,19 @@ export class ClienteFormComponent {
   }
 
 
+  // Funzionalità di aggiunta cliente alla lista dei clienti
   aggiungiCliente() {
-    if (this.clienteForm.valid) {
-      const nuovoCliente = this.clienteForm.value as ICliente;
-      nuovoCliente.codice = this.clienteService.listaClienti().length + 1;
-      this.clienteService.clienteAggiunto.set(nuovoCliente);
+    if (this.clienteForm.valid) { // Se il form è valido
+      const nuovoCliente = this.clienteForm.value as ICliente; 
+      nuovoCliente.codice = this.clienteService.listaClienti().length + 1; // Assegno un codice univoco
+      this.clienteService.clienteAggiunto.set(nuovoCliente); // Setto il nuovo cliente nella variabile di servizio
 
-      if (nuovoCliente.idGruppo && nuovoCliente.idGruppo > 0)
-        this.gruppoService.addUserToGroup();
+      if (nuovoCliente.idGruppo && nuovoCliente.idGruppo > 0) // Se è stato selezionato un gruppo
+        this.gruppoService.addUserToGroup(); // aggiungo l'utente al gruppo (verrà ricalcolato anche il numero di partecipanti)
 
-      this.clienteService.listaClienti().unshift({ ...nuovoCliente });
+      this.clienteService.listaClienti().unshift({ ...nuovoCliente }); // Inserisco il nuovo cliente in cima alla lista
 
-      this.clienteForm.reset();
-      this.clienteForm.markAsUntouched();
+      this.clienteForm.reset(); // Reinizializzo il cliente vuoto per il form
     }
   }
 }

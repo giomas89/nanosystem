@@ -38,31 +38,31 @@ export class CarrelloComponent implements OnInit {
   datePipe = inject(DatePipe);
 
   ngOnInit() {
+    // Inizializzo data e ora del carrelo con data/ora attuale se non definito
     if (this.carrelloService.carrello().dataOra === undefined) {
       this.carrelloService.carrello().dataOra = new Date();
     }
+    // Appoggio la data e l'ora attuali nelle proprietà "separate" per data e ora
     this.selectedDate = this.carrelloService.carrello().dataOra;
     this.selectedTime = this.datePipe.transform(this.carrelloService.carrello().dataOra, 'HH:mm');
   }
 
-  aggiornaDataOra(event: MatDatepickerInputEvent<Date>) {
-    if (event.value) {
-      this.selectedDate = event.value;
-      this.aggiornaDataOraCarrello();
-    }
-  }
-
-  aggiornaOra() {
+  // Richiamo la funzione di aggiornamento di data e ora quando l'input della data viene triggerato
+  aggiornaData() {
+    console.log('aggiorna data');
     this.aggiornaDataOraCarrello();
   }
 
+  // Richiamo la funzione di aggiornamento di data e ora quando l'input della data viene triggerato
+  aggiornaOra() {
+    console.log('aggiorna ora');
+    this.aggiornaDataOraCarrello();
+  }
+
+  // Ricostruisco dataOra del carrello riunendo data e orario inseriti sugli input
   aggiornaDataOraCarrello() {
-    console.log('selectedDate:', this.selectedDate);
-    console.log('selectedTime:', this.selectedTime);
-    console.log('dataOra:',this.carrelloService.carrello().dataOra);
     if (this.selectedDate && this.selectedTime) {
 
-      console.log('dataOra:',this.carrelloService.carrello().dataOra);
       const timeParts = this.selectedTime.split(':');
       if (timeParts.length === 2 && !isNaN(parseInt(timeParts[0], 10)) && !isNaN(parseInt(timeParts[1], 10))) {
         this.carrelloService.carrello().dataOra = new Date(

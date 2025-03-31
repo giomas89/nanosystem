@@ -4,22 +4,23 @@ git commit -m "allineamento"
 git push
 ng build --configuration production --base-href /tc-helicon-perform-ve-editor/
 ng deploy
+
 # Per PAGES
 ng build --base-href /nanosystem/
 ngh --dir=dist/pizza-ordine-app/browser
 --->
-<div style="display: flex; flex-direction: column; height: 100vh;">
-  <div style="padding: 8px; background-color: var(--primary-color);">
-    <h2 style="margin: 0; color: white;">Pizza Order</h2>
-  </div>
-  <div style="flex-grow: 1; display: flex;justify-content:space-between; overflow-y: hidden;">
-    <div style="padding: 8px; display: flex; flex:1; justify-content: space-between;">
-      <app-cliente-form style="flex: 0 0 calc(30% - 8px); padding: 8px; box-sizing: border-box; border: 1px dotted var(--primary-color); border-radius: 7px;"></app-cliente-form>
-      <app-cliente-lista style="flex: 0 0 35%; padding: 8px; box-sizing: border-box; border: 1px dotted var(--primary-color); border-radius: 7px; overflow-y: auto;"></app-cliente-lista>
-      <app-pizza-menu style="flex: 0 0 calc(35% - 8px); padding: 8px; box-sizing: border-box; border: 1px dotted var(--primary-color); border-radius: 7px; overflow-y: auto;"></app-pizza-menu>
+<div class="page-container">
+  <header class="page-header">
+    <h2>Pizza Order</h2>
+  </header>
+  <main class="content-area">
+    <div class="main-columns">
+      <app-cliente-form class="main-column cliente-form-col"></app-cliente-form>
+      <app-cliente-lista class="main-column cliente-lista-col"></app-cliente-lista>
+      <app-pizza-menu class="main-column pizza-menu-col"></app-pizza-menu>
     </div>
-    <div style="width: 25%; background-color: #fff8f0; border-left: 1px solid #c0c0c0; padding: 8px; overflow-y: auto;">
+    <aside class="cart-sidebar">
       <app-carrello></app-carrello>
-    </div>
-  </div>
+    </aside>
+  </main>
 </div>

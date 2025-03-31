@@ -22,14 +22,12 @@ export class CarrelloService {
 
   selezionaCliente(cliente: ICliente) {
     this.carrello().cliente = cliente;
-    // if (this.carrello().pizza)
-      this.calcoloTotale();
+    this.calcoloTotale(); 
   }
 
   selezionaPizza(pizza: IPizza) {
     this.carrello().pizza = pizza;
-    // if (this.carrello().cliente)
-      this.calcoloTotale();
+    this.calcoloTotale();
   }
 
   svuotaCarrello() {
@@ -37,6 +35,7 @@ export class CarrelloService {
   }
 
 
+  // Funzionalità di calcolo sconto
   calcoloSconto() {
     let sconto = 0;
     let motivazioneSconto = '';
@@ -96,17 +95,15 @@ export class CarrelloService {
           sconto = 70;
           motivazioneSconto = 'Il cliente ha 60 o più anni = sconto del 70%';
         }
-      }
-
-      //Se non è stato già applicato lo sconto di gruppo, scontare del 50% se chi ordina è un bambino sotto i 4 anni, del 20% se è sotto i 12 anni
-      if (sconto === 0) {
+      } else {
+        // Se il cliente ha meno di 4 anni, lo ssconto sarà del 50% 
         if (this.clienteService.calcolaEta(this.carrello().cliente.dataNascita) <= 4) {
           if (50 > sconto) {
             sconto = 50;
             motivazioneSconto = 'Il cliente ha meno di 4 anni = sconto del 50%';
           }
-        }
-        if (this.clienteService.calcolaEta(this.carrello().cliente.dataNascita) <= 12) {
+        } else if (this.clienteService.calcolaEta(this.carrello().cliente.dataNascita) <= 12) {
+          // Se il cliente ha meno di 12 anni, lo ssconto sarà del 50% 
           if (20 > sconto) {
             sconto = 20;
             motivazioneSconto = 'Il cliente ha meno di 12 anni = sconto del 20%';
@@ -114,7 +111,8 @@ export class CarrelloService {
         }
       }
 
-      // Se non sono stati applicati altri sconti, e l'ordine arriva entro le 20:00, scontare del 10%.
+   
+      // Se non sono stati applicati altri sconti e l'ordine arriva entro le 20:00, scontare del 10%.
       // Lo stesso sconto si applica per il weekend indipendentemente dall'ora
       if (sconto === 0) {
         const dataOrdine = this.carrello().dataOra;
@@ -131,15 +129,16 @@ export class CarrelloService {
       }
     }
 
-    // A questo punto passo lo sconto alla funzione di calcolo del totale
+    // A questo punto imposto lo sconto sul service
     this.carrello().sconto = sconto;
     this.carrello().motivazioneSconto = motivazioneSconto;
   }
 
   calcoloTotale() {
-    this.calcoloSconto();
+    this.calcoloSconto(); // Chiamo la funzione di calcolo dello sconto
 
     let totale  = 0;
+    // Se ho già una pizza selezionata (visto che determina il prezzo) farò i calcoli
     if (this.carrello().pizza){
       let scontoPerc = this.carrello().sconto / 100; // Calcola la percentuale di sconto (es. 0.10 per 10%)
       this.carrello().importoSconto = Math.floor(this.carrello().pizza.prezzo * scontoPerc * 100) / 100; // Calcola l'importo dello sconto
@@ -155,7 +154,7 @@ export class CarrelloService {
     this.carrello().totale = totale;
   }
 
-  getSconti(): Observable<string> {
-    return this.httpClient.get('assets/scontistica.txt', { responseType: 'text' });
-  }
+  // getSconti(): Observable<string> {
+  //   return this.httpClient.get('assets/scontistica.txt', { responseType: 'text' });
+  // }
 }

@@ -70,7 +70,7 @@
       <h4 style="margin:0">Data e ora dell'ordine</h4>
       <div class="data-ora-container">
         <mat-form-field class="custom-font">
-          <input matInput [matDatepicker]="picker" placeholder="Data" [(ngModel)]="selectedDate" (dateChange)="aggiornaDataOra($event)">
+          <input matInput [matDatepicker]="picker" placeholder="Data" [(ngModel)]="selectedDate" (dateChange)="aggiornaData()">
           <mat-datepicker-toggle class="custom-form" matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker class="custom-form" #picker></mat-datepicker>
         </mat-form-field>

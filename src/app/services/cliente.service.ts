@@ -15,6 +15,7 @@ export class ClienteService {
 
   constructor() { }
 
+  // Generazione tramite supporto di AI di una lista di clienti
   inizializzaListaClienti(){
     let arClienti: ICliente[] = [
       {
@@ -112,6 +113,7 @@ export class ClienteService {
     this.listaClienti.set(arClienti);
   }
 
+  // Calcolo dell'età (funzione che verrà utilizzata nel calcolo degli sconti)
   calcolaEta(dateOfBirth: Date): number {
     if (!dateOfBirth) return 0;
 
@@ -125,16 +127,4 @@ export class ClienteService {
 
     return eta;
   }
-
-  // filtraClienti() {
-  //   const filteredClients = this.listaClienti();
-  //   if (this.searchTerm){
-  //     this.listaClienti().filter(cliente =>
-  //       cliente.nome.toLowerCase().includes(this.searchTerm().toLowerCase()) ||
-  //       cliente.cognome.toLowerCase().includes(this.searchTerm().toLowerCase())
-  //     );
-  //   }
-  //   this.listaClientiFiltrati.set(filteredClients);
-  // }
-
 }
